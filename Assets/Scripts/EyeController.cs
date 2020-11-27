@@ -112,7 +112,8 @@ public class EyeController : MonoBehaviour
                         ballRB.gravityScale = 1f;
                         break;
                     case Eye.Anti:
-                        ball.GetComponent<BallController>().anti = false;
+                        if(!open)
+                            ball.GetComponent<BallController>().anti = false;
                         break;
                 }
             }
