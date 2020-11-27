@@ -63,6 +63,9 @@ public class EyeController : MonoBehaviour
             case Eye.HighGrav:
                 index = 3;
                 break;
+            case Eye.Anti:
+                index = 4;
+                break;
         }
         sr.sprite = sprites[index];
         bsr.color = beams[index];
