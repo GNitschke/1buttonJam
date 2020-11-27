@@ -10,8 +10,10 @@ public class BallController : MonoBehaviour
 
     public Goal[] goals;
 
-    public float power;
+    private float maxPower;
+    private float power;
     private Rigidbody2D rb;
+    public bool anti;
 
     public string nextLevel;
 
@@ -20,8 +22,10 @@ public class BallController : MonoBehaviour
     void Start()
     {
         charging = false;
+        anti = false;
         readyForLaunch = true;
         power = 100;
+        maxPower = 470;
         rb = GetComponent<Rigidbody2D>();
         strengthBar = transform.GetChild(1).GetComponent<RectTransform>();
         rb.gravityScale = 0;
@@ -32,10 +36,10 @@ public class BallController : MonoBehaviour
         if (Input.anyKey && readyForLaunch)
         {
             charging = true;
-            if (power < 530f)
+            if (power < maxPower)
             {
                 power += 2f;
-                strengthBar.localPosition = new Vector3(0, 0.55f + 0.9f * (power-100f)/440f, 0);
+                strengthBar.localPosition = new Vector3(0, 0.55f + 0.9f * (power - 100f)/(maxPower - 80f), 0);
             }
         }
         else if (charging)

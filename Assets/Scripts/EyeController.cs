@@ -7,7 +7,8 @@ public enum Eye
     Pull,
     Push,
     LowGrav,
-    HighGrav
+    HighGrav,
+    Anti
 }
 
 public class EyeController : MonoBehaviour
@@ -71,19 +72,69 @@ public class EyeController : MonoBehaviour
     {
         GameObject ball = collision.gameObject;
 
-        if (ball.name == "Ball" && open)
+        if (ball.name == "Ball")
         {
-            Rigidbody2D ballRB =  ball.GetComponent<Rigidbody2D>();
+            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
+            if (open && !ball.GetComponent<BallController>().anti)
+            {
+                switch (eyeType)
+                {
+                    case Eye.Pull:
+                        ballRB.AddForce(transform.up * strength);
+                        break;
+                    case Eye.Push:
+                        ballRB.AddForce(transform.up * -strength);
+                        break;
+                    case Eye.LowGrav:
+                        ballRB.gravityScale = 0.2f;
+                        //ballRB.drag = 1f;
+                        break;
+                    case Eye.HighGrav:
+                        ballRB.gravityScale = 1.5f;
+                        break;
+                    case Eye.Anti:
+                        ball.GetComponent<BallController>().anti = true;
+                        break;
+                }
+
+            }
+            else
+            {
+                switch (eyeType)
+                {
+                    case Eye.LowGrav:
+                        ballRB.gravityScale = 1f;
+                        break;
+                    case Eye.HighGrav:
+                        ballRB.gravityScale = 1f;
+                        break;
+                    case Eye.Anti:
+                        ball.GetComponent<BallController>().anti = false;
+                        break;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        GameObject ball = collision.gameObject;
+
+        if (ball.name == "Ball")
+        {
+            Rigidbody2D ballRB = ball.GetComponent<Rigidbody2D>();
             switch (eyeType)
             {
-                case Eye.Pull:
-                    ballRB.AddForce(transform.up * strength);
+                case Eye.LowGrav:
+                    ballRB.gravityScale = 1f;
                     break;
-                case Eye.Push:
-                    ballRB.AddForce(transform.up * -strength);
+                case Eye.HighGrav:
+                    ballRB.gravityScale = 1f;
+                    break;
+                case Eye.Anti:
+                    ball.GetComponent<BallController>().anti = false;
                     break;
             }
-            
         }
     }
 
