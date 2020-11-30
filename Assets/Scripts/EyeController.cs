@@ -21,34 +21,22 @@ public class EyeController : MonoBehaviour
     public Sprite[] sprites;
     public Color[] beams;
 
+    public Sprite[] masks;
+    private SpriteMask blinkMask;
+
     public bool startOpen;
     public float closedTime;
     public float openTime;
+
+    private AudioSource openSound;
     
     void Start()
     {
-        if (closedTime > 0)
-        {
-            if (startOpen)
-            {
-                open = true;
-                StartCoroutine(Close());
-            }
-            else
-            {
-                open = false;
-                transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-                StartCoroutine(Open());
-            }
-        }
-        else
-        {
-            open = true;
-        }
-
         index = 0;
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         SpriteRenderer bsr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        openSound = GetComponent<AudioSource>();
+        
         switch (eyeType)
         {
             case Eye.Pull:
@@ -69,6 +57,29 @@ public class EyeController : MonoBehaviour
         }
         sr.sprite = sprites[index];
         bsr.color = beams[index];
+
+        blinkMask = transform.GetChild(1).GetComponent<SpriteMask>();
+        if(closedTime == 0)
+        {
+            blinkMask.sprite = masks[5];
+            open = true;
+        }
+        else if (!startOpen)
+        {
+            blinkMask.sprite = masks[0];
+            open = false;
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+            StartCoroutine(Open());
+        }
+        else
+        {
+            open = true;
+            StartCoroutine(Close());
+        }
+
+        //open = false;
+        //transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        //StartCoroutine(Open());
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -144,17 +155,41 @@ public class EyeController : MonoBehaviour
 
     IEnumerator Open()
     {
+        //if (!startOpen)
         yield return new WaitForSeconds(closedTime);
+        SpriteRenderer beam = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        //openSound.Play();
+        beam.enabled = true;
+        beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, 0);
+        for (int i = 0; i < masks.Length; i++)
+        {
+            blinkMask.sprite = masks[i];
+            //yield return new WaitForFixedUpdate();
+            beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i/(masks.Length-1f) * 0.5f);
+            yield return new WaitForFixedUpdate();
+        }
         open = true;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-        StartCoroutine(Close());
+        //yield return new WaitForSeconds(openTime);
+        if (closedTime > 0)
+            StartCoroutine(Close());
     }
 
     IEnumerator Close()
     {
         yield return new WaitForSeconds(openTime);
+        SpriteRenderer beam = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        for (int i = masks.Length - 1; i >= 0; i--)
+        {
+            blinkMask.sprite = masks[i];
+            //yield return new WaitForFixedUpdate();
+            beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i / (masks.Length - 1f) * 0.5f);
+            yield return new WaitForFixedUpdate();
+        }
         open = false;
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        beam.enabled = false;
+
+        //if(startOpen)
+        //    yield return new WaitForSeconds(closedTime);
         StartCoroutine(Open());
     }
 }

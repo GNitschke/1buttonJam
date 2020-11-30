@@ -44,6 +44,9 @@ TagManager:
   - name: EyeBeam
     uniqueID: 2670345049
     locked: 0
+  - name: Eye
+    uniqueID: 2436147143
+    locked: 0
   - name: StrengthBar
     uniqueID: 609970611
     locked: 0

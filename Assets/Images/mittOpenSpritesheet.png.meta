@@ -1,0 +1,359 @@
+fileFormatVersion: 2
+guid: 39210c48d87a97d40b4f44c14e0216a5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3748325231336568299
+    second: mittOpenSpritesheet_0
+  - first:
+      213: -1229102923670174525
+    second: mittOpenSpritesheet_1
+  - first:
+      213: -2825451720232284591
+    second: mittOpenSpritesheet_2
+  - first:
+      213: 2281442668659724908
+    second: mittOpenSpritesheet_3
+  - first:
+      213: 889797852312513173
+    second: mittOpenSpritesheet_4
+  - first:
+      213: 1862348142876421773
+    second: mittOpenSpritesheet_5
+  - first:
+      213: -3698790130519310259
+    second: mittOpenSpritesheet_6
+  - first:
+      213: 4518965288480661766
+    second: mittOpenSpritesheet_7
+  - first:
+      213: -5540846767885191412
+    second: mittOpenSpritesheet_0
+  - first:
+      213: 4555530310885974810
+    second: mittOpenSpritesheet_1
+  - first:
+      213: 5398715737963994547
+    second: mittOpenSpritesheet_2
+  - first:
+      213: 2902833278083421911
+    second: mittOpenSpritesheet_3
+  - first:
+      213: 4769695177676735802
+    second: mittOpenSpritesheet_4
+  - first:
+      213: 6469477425111032700
+    second: mittOpenSpritesheet_5
+  - first:
+      213: 3832356381087598535
+    second: mittOpenSpritesheet_6
+  - first:
+      213: 4405954998410871434
+    second: mittOpenSpritesheet_7
+  - first:
+      213: 3294898268970564732
+    second: mittOpenSpritesheet_8
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 173.33334
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07f455a835fa13b0800000000000000
+      internalID: -5540846767885191412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 173.33334
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1322e77eae783f30800000000000000
+      internalID: 4555530310885974810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 173.33334
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bd97ac2c571cea40800000000000000
+      internalID: 5398715737963994547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 87.333336
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d6585e8c7fe84820800000000000000
+      internalID: 2902833278083421911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 87.333336
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a35c0504e7c513240800000000000000
+      internalID: 4769695177676735802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 87.333336
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c73e62ef07338c950800000000000000
+      internalID: 6469477425111032700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.3333359
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d400dab29f14bacc0800000000000000
+      internalID: -3698790130519310259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mittOpenSpritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1.3333359
+        width: 85.666664
+        height: 86.666664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 601e534ccf696be30800000000000000
+      internalID: 4518965288480661766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
