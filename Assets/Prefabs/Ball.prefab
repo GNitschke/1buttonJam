@@ -315,6 +315,8 @@ MonoBehaviour:
   goals: []
   anti: 0
   nextLevel: 
+  currentScore: 0
+  levelScore: 0
 --- !u!58 &5197833017711024326
 CircleCollider2D:
   m_ObjectHideFlags: 0

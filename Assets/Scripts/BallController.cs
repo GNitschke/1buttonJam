@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -27,6 +28,9 @@ public class BallController : MonoBehaviour
 
     private ScoreTracker scoreTracker;
 
+    private Transform info;
+    private Animator hand;
+
     void Start()
     {
         charging = false;
@@ -39,10 +43,17 @@ public class BallController : MonoBehaviour
         chargeSound = transform.GetChild(0).GetComponent<AudioSource>();
         powerText = transform.GetChild(2).GetChild(0).GetComponent<Text>();
         scoreTracker = FindObjectOfType<ScoreTracker>();
+        info = GameObject.Find("Info").transform;
+        hand = GameObject.Find("Hand").GetComponent<Animator>();
+        GetComponent<SpriteRenderer>().enabled = false;
+        
         rb.gravityScale = 0;
 
         currentScore = 0;
         levelScore = 1000;
+        info.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score: " + scoreTracker.totalScore;
+        info.GetChild(1).GetComponent<TextMeshProUGUI>().text = scoreTracker.nextLevel;
+        info.GetChild(2).GetComponent<TextMeshProUGUI>().text = scoreTracker.levelTracker;
     }
 
 
@@ -76,6 +87,8 @@ public class BallController : MonoBehaviour
             readyForLaunch = false;
             rb.gravityScale = 1f;
             powerText.text = "";
+            hand.SetTrigger("throw");
+            GetComponent<SpriteRenderer>().enabled = true;
             rb.AddForce(Vector2.up * power);
             strengthBar.localPosition = new Vector3(0, 0.7f, 0);
             power = 100;
@@ -92,9 +105,15 @@ public class BallController : MonoBehaviour
     {
         rb.velocity = new Vector2(0, 0);
         rb.gravityScale = 0;
-        transform.position = new Vector2(0, -2.8f);
-        if(GetComponent<SpriteRenderer>().enabled)
+        
+        if (GetComponent<SpriteRenderer>().enabled)
+        {
             readyForLaunch = true;
+            hand.SetTrigger("reset");
+        }
+        GetComponent<SpriteRenderer>().enabled = false;
+        transform.position = new Vector2(0, -2.8f);
+
         levelScore = levelScore > 100 ? levelScore - 100 : 100;
     }
 
@@ -103,7 +122,8 @@ public class BallController : MonoBehaviour
         bool won = true;
         currentScore += levelScore;
         levelScore += 100;
-        
+        info.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score: " + (scoreTracker.totalScore + currentScore);
+
         foreach (Goal goal in goals)
         {
             if (!goal.caught)

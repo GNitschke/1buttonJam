@@ -155,41 +155,51 @@ public class EyeController : MonoBehaviour
 
     IEnumerator Open()
     {
-        //if (!startOpen)
-        yield return new WaitForSeconds(closedTime);
         SpriteRenderer beam = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        //openSound.Play();
+        open = false;
         beam.enabled = true;
         beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, 0);
-        for (int i = 0; i < masks.Length; i++)
-        {
-            blinkMask.sprite = masks[i];
-            //yield return new WaitForFixedUpdate();
-            beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i/(masks.Length-1f) * 0.5f);
-            yield return new WaitForFixedUpdate();
-        }
-        open = true;
-        //yield return new WaitForSeconds(openTime);
+        yield return new WaitForSeconds(closedTime - 1);
+        
+        //openSound.Play();
+        beam.enabled = true;
+        beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, 0.05f);
+        blinkMask.sprite = masks[6];
+        yield return new WaitForSeconds(1);
         if (closedTime > 0)
             StartCoroutine(Close());
+        //opening eye
+        for (int i = 1; i < masks.Length-1; i++)
+        {
+            blinkMask.sprite = masks[i];
+            if (!open)
+            {
+                beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i / (masks.Length - 1f) * 0.5f);
+            }
+            yield return new WaitForFixedUpdate();
+        }
+        
     }
 
     IEnumerator Close()
     {
-        yield return new WaitForSeconds(openTime);
         SpriteRenderer beam = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        for (int i = masks.Length - 1; i >= 0; i--)
+        open = true;
+        beam.enabled = true;
+        beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, 0.5f);
+        yield return new WaitForSeconds(openTime);
+        StartCoroutine(Open());
+        //closing eye
+        for (int i = masks.Length - 2; i >= 0; i--)
         {
             blinkMask.sprite = masks[i];
-            //yield return new WaitForFixedUpdate();
-            beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i / (masks.Length - 1f) * 0.5f);
+            if (open)
+            {
+                beam.color = new Color(beam.color.r, beam.color.g, beam.color.b, i / (masks.Length - 1f) * 0.5f);
+            }
             yield return new WaitForFixedUpdate();
         }
-        open = false;
+        
         beam.enabled = false;
-
-        //if(startOpen)
-        //    yield return new WaitForSeconds(closedTime);
-        StartCoroutine(Open());
     }
 }
