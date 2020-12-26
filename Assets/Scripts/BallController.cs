@@ -19,7 +19,9 @@ public class BallController : MonoBehaviour
 
     public string nextLevel;
 
-    private RectTransform strengthBar;
+    //private RectTransform strengthBar;
+    private Transform trajectory;
+    private Transform[] points;
     private Text powerText;
     private AudioSource chargeSound;
 
@@ -39,8 +41,15 @@ public class BallController : MonoBehaviour
         power = 100;
         maxPower = 480;
         rb = GetComponent<Rigidbody2D>();
-        strengthBar = transform.GetChild(1).GetComponent<RectTransform>();
-        chargeSound = transform.GetChild(0).GetComponent<AudioSource>();
+        //strengthBar = transform.GetChild(1).GetComponent<RectTransform>();
+        trajectory = transform.GetChild(3);
+        points = new Transform[trajectory.childCount];
+        for(int i = 0; i < trajectory.childCount; i++)
+        {
+            points[i] = trajectory.GetChild(i);
+            points[i].GetComponent<SpriteRenderer>().enabled = false;
+        }
+        chargeSound = GetComponent<AudioSource>();
         powerText = transform.GetChild(2).GetChild(0).GetComponent<Text>();
         scoreTracker = FindObjectOfType<ScoreTracker>();
         info = GameObject.Find("Info").transform;
@@ -61,6 +70,10 @@ public class BallController : MonoBehaviour
     {
         if (Input.anyKey && readyForLaunch)
         {
+            foreach (Transform point in points)
+            {
+                point.GetComponent<SpriteRenderer>().enabled = true;
+            }
             if (!charging)
             {
                 chargeSound.Play();
@@ -77,7 +90,14 @@ public class BallController : MonoBehaviour
                 rb.gravityScale = 0;
                 transform.position = new Vector2(0, -2.8f);
                 powerText.text = "" + (int)((power-100f)/(maxPower - 100f) * 100f);
-                strengthBar.localPosition = new Vector3(0, 0.7f + 1.5f * (power - 100f)/(maxPower - 100f), 0);
+                //strengthBar.localPosition = new Vector3(0, 0.7f + 1.5f * (power - 100f)/(maxPower - 100f), 0);
+                int index = 0;
+                for (float i = 2f; index < points.Length; i -= 0.4f)//0.9 1.8 2.7 3.6 4.5
+                {
+                    points[index].localPosition = new Vector3(0, i * (power - 100f) / (maxPower - 100f), 0);
+                    index++;
+                }
+                
             }
         }
         else if (charging)
@@ -90,7 +110,13 @@ public class BallController : MonoBehaviour
             hand.SetTrigger("throw");
             GetComponent<SpriteRenderer>().enabled = true;
             rb.AddForce(Vector2.up * power);
-            strengthBar.localPosition = new Vector3(0, 0.7f, 0);
+            //strengthBar.localPosition = new Vector3(0, 0.7f, 0);
+            trajectory.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            foreach (Transform point in points)
+            {
+                point.localPosition = new Vector3(0, 0, 0);
+                point.GetComponent<SpriteRenderer>().enabled = false;
+            }
             power = 100;
         }
         else if (readyForLaunch)
