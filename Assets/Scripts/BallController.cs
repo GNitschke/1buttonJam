@@ -29,9 +29,12 @@ public class BallController : MonoBehaviour
     public int levelScore;
 
     private ScoreTracker scoreTracker;
+    private Transform multiplierTracker;
 
     private Transform info;
     private Animator hand;
+
+    public bool wonLevel;
 
     void Start()
     {
@@ -55,6 +58,9 @@ public class BallController : MonoBehaviour
         info = GameObject.Find("Info").transform;
         hand = GameObject.Find("Hand").GetComponent<Animator>();
         GetComponent<SpriteRenderer>().enabled = false;
+        multiplierTracker = GameObject.Find("MultiplierTracker").transform;
+
+        wonLevel = false;
         
         rb.gravityScale = 0;
 
@@ -139,8 +145,11 @@ public class BallController : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().enabled = false;
         transform.position = new Vector2(0, -2.8f);
-
         levelScore = levelScore > 100 ? levelScore - 100 : 100;
+        for (int i = 9; i > (levelScore/100) - 1; i--)
+        {
+            multiplierTracker.GetChild(i).GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     public void checkWin()
@@ -148,6 +157,7 @@ public class BallController : MonoBehaviour
         bool won = true;
         currentScore += levelScore;
         levelScore += 100;
+
         info.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Score: " + (scoreTracker.totalScore + currentScore);
 
         foreach (Goal goal in goals)
@@ -163,12 +173,14 @@ public class BallController : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().enabled = false;
             levelScore = 1000;
+            wonLevel = true;
             StartCoroutine(Win());
         }
     }
 
     IEnumerator Win()
     {
+        //toLowerMultiplier = false;
         scoreTracker.totalScore += currentScore;
         scoreTracker.nextLevel = nextLevel;
         yield return new WaitForSeconds(2f);

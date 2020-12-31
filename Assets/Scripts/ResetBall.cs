@@ -8,7 +8,7 @@ public class ResetBall : MonoBehaviour
     {
         GameObject ball = collision.gameObject;
         
-        if (ball.name == "Ball")
+        if (ball.name == "Ball" && !ball.GetComponent<BallController>().wonLevel)
         {
             ball.GetComponent<BallController>().resetBall();
         }
