@@ -12,12 +12,18 @@ public class Transition : MonoBehaviour
     private TextMeshProUGUI score;
 
     private bool up;
+    private bool exiting;
+
+    private Animator wipe;
+    private Animator info;
 
     void Start()
     {
         scoreTracker = FindObjectOfType<ScoreTracker>();
+        wipe = GameObject.Find("ScreenWipe").GetComponent<Animator>();
         level = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         score = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        info = GameObject.Find("Info").GetComponent<Animator>();
 
         if (scoreTracker.nextLevel != "Level 1")
         {
@@ -46,17 +52,30 @@ public class Transition : MonoBehaviour
         level.text = scoreTracker.nextLevel;
         score.text = "Score: " + scoreTracker.totalScore;
         up = false;
+        exiting = false;
     }
 
     void Update()
     {
-        if (Input.anyKey)
+        if (!exiting)
         {
-            up = true;
+            if (Input.anyKey)
+            {
+                up = true;
+            }
+            else if (up)
+            {
+                exiting = true;
+                StartCoroutine(nextScene());
+            }
         }
-        else if (up)
-        {
-            SceneManager.LoadScene("Scenes/" + scoreTracker.nextLevel);
-        }
+    }
+
+    IEnumerator nextScene()
+    {
+        wipe.SetTrigger("End");
+        info.SetTrigger("End");
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Scenes/" + scoreTracker.nextLevel);
     }
 }

@@ -30,6 +30,7 @@ public class BallController : MonoBehaviour
 
     private ScoreTracker scoreTracker;
     private Transform multiplierTracker;
+    private Animator wipe;
 
     private Transform info;
     private Animator hand;
@@ -59,6 +60,7 @@ public class BallController : MonoBehaviour
         hand = GameObject.Find("Hand").GetComponent<Animator>();
         GetComponent<SpriteRenderer>().enabled = false;
         multiplierTracker = GameObject.Find("MultiplierTracker").transform;
+        wipe = GameObject.Find("ScreenWipe").GetComponent<Animator>();
 
         wonLevel = false;
         
@@ -148,7 +150,7 @@ public class BallController : MonoBehaviour
         levelScore = levelScore > 100 ? levelScore - 100 : 100;
         for (int i = 9; i > (levelScore/100) - 1; i--)
         {
-            multiplierTracker.GetChild(i).GetComponent<SpriteRenderer>().enabled = false;
+            multiplierTracker.GetChild(i).GetComponent<Animator>().SetBool("lose", true);
         }
     }
 
@@ -183,7 +185,11 @@ public class BallController : MonoBehaviour
         //toLowerMultiplier = false;
         scoreTracker.totalScore += currentScore;
         scoreTracker.nextLevel = nextLevel;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        multiplierTracker.GetComponent<Animator>().SetTrigger("End");
+        info.GetComponent<Animator>().SetTrigger("End");
+        wipe.SetTrigger("End");
+        yield return new WaitForSeconds(1.5f);
         if (nextLevel != "End")
         {
             SceneManager.LoadScene("Scenes/TransitionLevel");
